@@ -59,6 +59,19 @@ namespace SolutionRenamer.Win.Logic
             }
         }
 
+        public static RenamerRule IsNotImage
+        {
+            get
+            {
+                return new RenamerRule("Not Image", (r, f) =>
+                {
+                    return !FileExtensionMatches(r.Path, "png") &&
+                        !FileExtensionMatches(r.Path, "gif") &&
+                        !FileExtensionMatches(r.Path, "jpg");
+                });
+            }
+        }
+
         public static RenamerRule IsNotGit
         {
             get

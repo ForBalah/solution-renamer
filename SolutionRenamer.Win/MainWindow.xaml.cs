@@ -42,6 +42,7 @@ namespace SolutionRenamer.Win
                 .SetNext(RenamerRule.IsNotCache)
                 .SetNext(RenamerRule.IsNotPdb)
                 .SetNext(RenamerRule.IsNotSuo)
+                .SetNext(RenamerRule.IsNotImage)
                 .Build();
         }
 
