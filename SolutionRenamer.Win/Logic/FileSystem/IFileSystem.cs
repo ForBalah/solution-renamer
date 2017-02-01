@@ -17,5 +17,7 @@ namespace SolutionRenamer.Win.Logic.FileSystem
         void Rename(RenamerInfo root, string oldName, string newName, IProgress<RenamerProgress> progressReport, ILogger logger);
 
         void CleanFolders(RenamerInfo root, string folderName, IList<RenameResult> results);
+
+        void DeleteFiles(RenamerInfo root, string folderName, string filenameSearch, List<RenameResult> results);
     }
 }

@@ -228,5 +228,42 @@ namespace SolutionRenamer.Win.Logic
 
             return success;
         }
+
+        public bool CleanDatabaseFiles(string folderName)
+        {
+            var success = true;
+            if (Root == null)
+            {
+                _logger.WriteWarning("Target folder is not set!");
+                success = false;
+            }
+            else
+            {
+                // We need to reset the target folder first before the clean can commence
+                SetTargetFolder(Root.Path);
+                var results = new List<RenameResult>();
+                _fileSystem.DeleteFiles(Root, folderName, "*.ldf", results);
+                _fileSystem.DeleteFiles(Root, folderName, "*.mdf", results);
+                foreach (var result in results)
+                {
+                    if (result.IsSuccess)
+                    {
+                        _logger.WriteInfo(result.Message);
+                    }
+                    else
+                    {
+                        _logger.WriteWarning(result.Message);
+                    }
+                }
+
+                if (results.Any(r => !r.IsSuccess))
+                {
+                    _logger.WriteWarning("Clean was not sucecssful.");
+                    success = false;
+                }
+            }
+
+            return success;
+        }
     }
 }

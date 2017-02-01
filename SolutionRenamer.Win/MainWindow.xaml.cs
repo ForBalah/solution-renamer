@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -60,6 +61,23 @@ namespace SolutionRenamer.Win
             if (!success)
             {
                 MessageBox.Show("Error occured during cleaning.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteDbFilesButton_Click(object sender, RoutedEventArgs e)
+        {
+            var deleteFolderName = ConfigurationManager.AppSettings["DatabaseFolder"];
+            if (MessageBox.Show($"This will delete the MDF/LDF files from {deleteFolderName}. Are you sure?", "Delete Local DB files", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                var result = _renamer.CleanDatabaseFiles(ConfigurationManager.AppSettings["DatabaseFolder"]);
+                if (result)
+                {
+                    MessageBox.Show("LocalDB files deleted successfully.", "Success");
+                }
+                else
+                {
+                    MessageBox.Show("Could not delete Local DB files.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

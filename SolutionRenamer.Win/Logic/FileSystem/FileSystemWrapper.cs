@@ -26,6 +26,43 @@ namespace SolutionRenamer.Win.Logic.FileSystem
             return new FileSystemWrapper();
         }
 
+        public void DeleteFiles(RenamerInfo root, string folderName, string filenameSearch, List<RenameResult> results)
+        {
+            // find the matching folder, find the matching files - delete
+            if (root.FileType == FileType.Directory)
+            {
+                if (Regex.IsMatch(Path.GetFileName(root.Path), folderName, RegexOptions.IgnoreCase))
+                {
+                    var filesToDelete = Directory.GetFiles(root.Path, filenameSearch);
+
+                    try
+                    {
+                        for (int i = root.Children.Count - 1; i >= 0; i--)
+                        {
+                            var child = root.Children[i];
+                            if (filesToDelete.Contains(child.Path) && child.FileType != FileType.Directory)
+                            {
+                                File.Delete(child.Path);
+                                root.Children.Remove(child);
+                                results.Add(new RenameResult($"Deleted file: {child.Path}", true));
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        results.Add(new RenameResult($"Deleted of '{root.Path}' + '{filenameSearch}' failed. " + e.ToString(), false));
+                    }
+                }
+                else
+                {
+                    foreach (var child in root.Children)
+                    {
+                        DeleteFiles(child, folderName, filenameSearch, results);
+                    }
+                }
+            }
+        }
+
         public RenamerInfo GetFiles(string folder, RenamerRule ruleSet)
         {
             if (string.IsNullOrWhiteSpace(folder))

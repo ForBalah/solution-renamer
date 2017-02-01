@@ -80,6 +80,9 @@
                             <Button x:Name="StartLocalDbButton" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0" Click="StartLocalDbButton_Click">
                                 <TextBlock Text="Restart MSSQLLocalDB" Margin="5" />
                             </Button>
+                            <Button x:Name="DeleteDbFilesButton" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0" Click="DeleteDbFilesButton_Click">
+                                <TextBlock Text="Delete LocalDB MDF/LDF files" Margin="5" />
+                            </Button>
                         </StackPanel>
                     </TabItem>
                 </TabControl>
