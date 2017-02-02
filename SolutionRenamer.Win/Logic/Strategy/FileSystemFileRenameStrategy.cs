@@ -31,13 +31,12 @@ namespace SolutionRenamer.Win.Logic.Strategy
                     {
                         var pluralized = "occurrence" + (renameCount != 1 ? "s" : string.Empty);
                         message.Append($"Replaced {renameCount} {pluralized} of '{oldName}'. ");
+                        File.WriteAllLines(info.Path, fileContents);
                     }
                     else
                     {
                         message.Append("Unchanged. ");
                     }
-
-                    File.WriteAllLines(info.Path, fileContents);
                 }
                 catch (Exception e)
                 {

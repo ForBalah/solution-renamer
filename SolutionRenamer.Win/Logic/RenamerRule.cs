@@ -59,15 +59,17 @@ namespace SolutionRenamer.Win.Logic
             }
         }
 
-        public static RenamerRule IsNotImage
+        public static RenamerRule IsNotFont
         {
             get
             {
-                return new RenamerRule("Not Image", (r, f) =>
+                return new RenamerRule("Not Font", (r, f) =>
                 {
-                    return !FileExtensionMatches(r.Path, "png") &&
-                        !FileExtensionMatches(r.Path, "gif") &&
-                        !FileExtensionMatches(r.Path, "jpg");
+                    return !FileExtensionMatches(r.Path, "eot") &&
+                        !FileExtensionMatches(r.Path, "svg") &&
+                        !FileExtensionMatches(r.Path, "ttf") &&
+                        !FileExtensionMatches(r.Path, "woff") &&
+                        !FileExtensionMatches(r.Path, "woff2");
                 });
             }
         }
@@ -79,6 +81,19 @@ namespace SolutionRenamer.Win.Logic
                 return new RenamerRule("Not Git", (r, f) =>
                 {
                     return !DirectoryOrFileStartsWith(r.Path, ".git");
+                });
+            }
+        }
+
+        public static RenamerRule IsNotImage
+        {
+            get
+            {
+                return new RenamerRule("Not Image", (r, f) =>
+                {
+                    return !FileExtensionMatches(r.Path, "png") &&
+                        !FileExtensionMatches(r.Path, "gif") &&
+                        !FileExtensionMatches(r.Path, "jpg");
                 });
             }
         }
