@@ -1,0 +1,92 @@
+﻿<Window x:Class="SolutionRenamer.Win.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SolutionRenamer.Win"
+        mc:Ignorable="d"
+        Title="Solution Renamer" Height="661" Width="1007" Icon="Images/rename-64.png" FontSize="14" Initialized="Window_Initialized">
+    <Grid>
+        <DockPanel LastChildFill="True">
+            <StackPanel DockPanel.Dock="Top">
+                <DockPanel LastChildFill="true">
+                    <Image Source="Images/Light-128.png" Width="128" Height="128" DockPanel.Dock="Left" />
+                    <Label Background="#FFFFFBD3" BorderBrush="#FF917667" BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock TextWrapping="WrapWithOverflow">
+                                Use this tool to perform a solution-wide namespace rename. Using simple pattern matching and a few rules,
+                                this tool will rename class files, namespaces, class names, folders, resource files, connection strings,
+                                properties, fields, etc. To perform a rename:
+                            </TextBlock>
+                            <StackPanel Margin="10,0,0,0">
+                                <TextBlock TextWrapping="WrapWithOverflow"><Run Text="0. Download or create the solution that will be renamed." /></TextBlock>
+                                <TextBlock TextWrapping="WrapWithOverflow"><Run Text="1. Select the solution folder." /></TextBlock>
+                                <TextBlock TextWrapping="WrapWithOverflow"><Run Text="2. Choose a name for the new solution. The name must not start with a number, must not have spaces, must have alphanumeric characters, and can have . and _. Two dots cannot be together and it cannot end it a dot." /></TextBlock>
+                                <TextBlock TextWrapping="WrapWithOverflow"><Run Text="3. Review the affected files using the File Preview tab." /></TextBlock>
+                                <TextBlock TextWrapping="WrapWithOverflow"><Run Text="4. Perform the rename!" /></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </Label>
+                </DockPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Background="#FFC7B718" Foreground="White" Margin="5,0">1.</Label>
+                    <Button x:Name="SolutionFolderSelectButton" Content="Select solution folder" Click="SolutionFolderSelectButton_Click" />
+                    <Label x:Name="SolutionFolderLabel" Content="" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Background="#FFC7B718" Foreground="White" Margin="5,0">2.</Label>
+                    <Label>Enter new solution name - From:</Label>
+                    <TextBox x:Name="FromSolutionNameTextBox" Width="200" IsEnabled="False" ToolTip="If there is a slight deviation in the name of the solution, update it here." TextChanged="SolutionNameTextBox_TextChanged" KeyDown="SolutionNameTextBox_KeyDown" />
+                    <Label>To:</Label>
+                    <TextBox x:Name="ToSolutionNameTextBox" Width="200" IsEnabled="False" ToolTip="Enter the name of the new solution here." TextChanged="SolutionNameTextBox_TextChanged" />
+                </StackPanel>
+            </StackPanel>
+            <StatusBar DockPanel.Dock="Bottom" Height="36">
+                <Image x:Name="StatusImage" Height="30" Source="Images/info-128.png" />
+                <Label x:Name="StatusLabel">
+                    Tool started successfully.
+                </Label>
+            </StatusBar>
+            <StackPanel DockPanel.Dock="Bottom">
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Background="#FFC7B718" Foreground="White" Margin="5,0">4.</Label>
+                    <Button x:Name="ExecuteButton" IsEnabled="False" Click="ExecuteButton_Click">Rename solution!</Button>
+                </StackPanel>
+            </StackPanel>
+            <DockPanel LastChildFill="True">
+                <TabControl x:Name="ResultsTabControl" Margin="0,5,0,0">
+                    <TabItem x:Name="LogsTabItem" Header="Log">
+                        <ScrollViewer>
+                            <TextBox x:Name="LogsTextBox" TextWrapping="WrapWithOverflow" IsReadOnly="True" />
+                        </ScrollViewer>
+                    </TabItem>
+                    <TabItem x:Name="FilesTabItem">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Background="#FFC7B718" Foreground="White" Margin="5,0">3.</Label>
+                                <Label>File Preview</Label>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <TreeView x:Name="FilesTreeView" />
+                    </TabItem>
+                    <TabItem x:Name="UtilitiesTabItem" Header="Utilities">
+                        <StackPanel Margin="10">
+                            <Button x:Name="CleanBinFoldersButton" Width="200" HorizontalAlignment="Left" Click="CleanBinFoldersButton_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label x:Name="CleanButtonReadyLabel" HorizontalAlignment="Left" Width="10"></Label>
+                                    <TextBlock Text="Clean bin/obj folders" Margin="5" />
+                                </StackPanel>
+                            </Button>
+                            <Button x:Name="StartLocalDbButton" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0" Click="StartLocalDbButton_Click">
+                                <TextBlock Text="Restart MSSQLLocalDB" Margin="5" />
+                            </Button>
+                            <Button x:Name="DeleteDbFilesButton" Width="200" HorizontalAlignment="Left" Margin="0,10,0,0" Click="DeleteDbFilesButton_Click">
+                                <TextBlock Text="Delete LocalDB MDF/LDF files" Margin="5" />
+                            </Button>
+                        </StackPanel>
+                    </TabItem>
+                </TabControl>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</Window>

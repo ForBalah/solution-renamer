@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionRenamer.Win", "SolutionRenamer.Win\SolutionRenamer.Win.csproj", "{993CADA7-AA44-42F6-8C8B-57388E5118B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolutionRenamer.Tests", "SolutionRenamer.Tests\SolutionRenamer.Tests.csproj", "{9ED7E92E-9B05-41F0-A4C7-E900FB86E8A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{993CADA7-AA44-42F6-8C8B-57388E5118B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{993CADA7-AA44-42F6-8C8B-57388E5118B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{993CADA7-AA44-42F6-8C8B-57388E5118B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{993CADA7-AA44-42F6-8C8B-57388E5118B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ED7E92E-9B05-41F0-A4C7-E900FB86E8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED7E92E-9B05-41F0-A4C7-E900FB86E8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED7E92E-9B05-41F0-A4C7-E900FB86E8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED7E92E-9B05-41F0-A4C7-E900FB86E8A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
